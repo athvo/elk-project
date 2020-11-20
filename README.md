@@ -60,8 +60,9 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Install docker
+- Install python3-pip
+- Install 
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -76,16 +77,27 @@ We have installed the following Beat on these machines:
 - Filebeat
 
 This Beat allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
-- Filebeat collects log files or specified locations, and forwards this information to Elasticsearch for indexing, Logstash for processing or Kibana for visualising the data in charts and graphs. 
+- Filebeat collects log files, for example pages viewed by users on the Apache server, and forwards this information to Elasticsearch for indexing, Logstash for processing or Kibana for visualising the data in charts and graphs. 
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the *filebeat-playbook.yml* file to */etc/ansible/roles/*.
+
+- Update the *filebeat-config.yml* file to include your ELK machine's IP address in hosts under output.elasticsearch: 
+        output.elasticsearch:
+        hosts: ["Your-IP-Address:9200"]
+        username: "elastic"
+        password: "changeme"
+    
+    And scroll to setup.kibana and update to include your ELK machine's IP address:
+        setup.kibana
+        host: "Your-IP-Address:5601"
+        
+    Save *filebeat-config.yml* to */etc/ansible/files/*.
+    
+- Run the playbook, and navigate to the Filebeat installation page on the ELK server's Graphical User Interface, scroll down to *Step 5: Module Status* and select *Check Data*, then scroll to the bottom of the page and select *Verify Incoming Data* to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
