@@ -113,10 +113,7 @@ SSH into the control node and follow the steps below:
         
     Save *filebeat-config.yml* to */etc/ansible/files/*.
     
-- Run the playbook, and navigate to http:[Elk-Public-IP]:5601/app/kibana#/home/tutorial/systemLogs and select *Check Data*
+- Run the playbook, and navigate to http:[Elk-Public-IP]:5601/app/kibana#/home/tutorial/systemLogs and select *Check Data*. If the message *Data successfully received from this module* appears, installation worked as expected.
 
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
 
-- Open terminal and SSH to Jump-Box-Provisioner
-- 
