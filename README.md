@@ -6,9 +6,8 @@ The files in this repository were used to configure the network depicted below.
 
 ![TODO: Update the path with the name of your diagram](Images/Network_Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the *filebeat-playbook.yml* file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
 
 This document contains the following details:
 - Description of the Topologu
@@ -37,6 +36,7 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | TODO     |          |            |                  |
 | TODO     |          |            |                  |
 
+
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
@@ -59,10 +59,13 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it allows for simple and efficient deployment, configuration and management of the ELK stack across many servers.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
 - Install docker
 - Install python3-pip
-- Install 
+- Install pip docker package
+- Configures Elk Virtual Machine to use more memory to run the ELK container
+- Download Docker container created by sebp, which is an elk container version 761
+- Starts docker container on boot
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -82,16 +85,20 @@ This Beat allow us to collect the following information from each machine:
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
+
 SSH into the control node and follow the steps below:
+
 - Copy the *filebeat-playbook.yml* file to */etc/ansible/roles/*.
 
 - Update the *filebeat-config.yml* file to include your ELK machine's IP address in hosts under output.elasticsearch: 
+        
         output.elasticsearch:
         hosts: ["Your-IP-Address:9200"]
         username: "elastic"
         password: "changeme"
     
     And scroll to setup.kibana and update to include your ELK machine's IP address:
+        
         setup.kibana
         host: "Your-IP-Address:5601"
         
@@ -99,9 +106,7 @@ SSH into the control node and follow the steps below:
     
 - Run the playbook, and navigate to the Filebeat installation page on the ELK server's Graphical User Interface, scroll down to *Step 5: Module Status* and select *Check Data*, then scroll to the bottom of the page and select *Verify Incoming Data* to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+
+
