@@ -18,6 +18,7 @@ This document contains the following details:
 - How to Use the Ansible Build
 
 
+
 ### Description of the Topology
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
@@ -29,12 +30,13 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name                 | Function       | IP Address | Operating System |
+|----------------------|----------------|------------|------------------|
+| Jump-Box-Provisioner | Gateway        | 10.0.0.4   | Linux            |
+| Web-1                | Web Server     | 10.0.0.5   | Linux            |
+| Web-2                | Web Server     | 10.0.0.6   | Linux            |
+| ELK                  | ELK Web Server | 10.1.0.4   | Linux            |
+
 
 
 ### Access Policies
@@ -48,11 +50,14 @@ Machines within the network can only be accessed by Jump-Box-Provisioner Virtual
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name                 | Publicly Accessible | Allowed IP Address |
+|----------------------|---------------------|--------------------|
+| Jump-Box-Provisioner | Yes                 | 139.218.106.25     |
+| Web-1                | No                  | 10.0.0.4           |
+| Web-2                | No                  | 10.0.0.4           |
+| Elk                  | No                  | 10.0.0.4           |
+
+
 
 ### Elk Configuration
 
@@ -71,6 +76,8 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ![Screenshot](docker_ps_output.png)
 
+
+
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
 - Web-1 10.0.0.5
@@ -81,6 +88,8 @@ We have installed the following Beat on these machines:
 
 This Beat allow us to collect the following information from each machine:
 - Filebeat collects log files, for example pages viewed by users on the Apache server, and forwards this information to Elasticsearch for indexing, Logstash for processing or Kibana for visualising the data in charts and graphs. 
+
+
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
@@ -104,9 +113,10 @@ SSH into the control node and follow the steps below:
         
     Save *filebeat-config.yml* to */etc/ansible/files/*.
     
-- Run the playbook, and navigate to the Filebeat installation page on the ELK server's Graphical User Interface, scroll down to *Step 5: Module Status* and select *Check Data*, then scroll to the bottom of the page and select *Verify Incoming Data* to check that the installation worked as expected.
+- Run the playbook, and navigate to http:[Elk-Public-IP]:5601/app/kibana#/home/tutorial/systemLogs and select *Check Data*
 
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
 
-
+- Open terminal and SSH to Jump-Box-Provisioner
+- 
